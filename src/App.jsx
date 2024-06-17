@@ -8,6 +8,8 @@ import Blogs from './Pages/Blogs';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import PrivateRoute from './Components/PrivateRoute';
+import OnlyAdminPrivateRoute from './Components/OnlyAdminPrivateRoute';
+import CreatePost from './Pages/CreatePost';
 const App = () => {
   return (
     <>
@@ -15,13 +17,17 @@ const App = () => {
     <Header />
     <Routes>
       <Route path="/about" element={<About />} />
-      <Route path="/blogs" element={<Blogs />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route element={<PrivateRoute />}>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/blogs" element={<Blogs />} />
       </Route>
+      <Route element={<OnlyAdminPrivateRoute />}>
+      <Route path="createpost" element={<CreatePost/>} />
+      </Route>
+
     </Routes>
     </BrowserRouter>
     </>

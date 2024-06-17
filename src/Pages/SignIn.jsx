@@ -44,11 +44,20 @@ const SignIn = () => {
                 return dispatch(signInFailure((data.message))); // Setting error message if registration fails
             }
             if (response.ok) {
-              dispatch(signInSuccess(data)); // Setting the current user if registration succeeds
-              navigate('/');
-              localStorage.setItem(data.token);
-                
-            }
+              console.log("Data received from server:", data);
+              if (data.token) {
+                  localStorage.setItem('Token', data.token);
+                  console.log("Token stored in localStorage:", data.token);
+              } else {
+                  console.error("Token is missing in the response data:", data);
+              }
+              dispatch(signInSuccess(data)); // Setting the current user if sign-in succeeds
+              navigate('/blogs');
+          } else {
+              console.error("Sign-in request failed with status:", response.status);
+              dispatch(signInFailure("Sign-in request failed")); // Setting error message if sign-in fails
+          }
+          
         } catch (error) {
           dispatch(signInFailure((error.message))); // Catching and logging any errors that occur during the fetch request
             

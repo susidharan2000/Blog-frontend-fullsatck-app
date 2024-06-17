@@ -23,7 +23,7 @@ const Header = () => {
     }
     const handleClicklogout = ()=>{
         dispatch(signOutSuccess());
-        localStorage.removeItem('token');
+        localStorage.removeItem('Token');
         navigate("/signIn");
     }
     return (
